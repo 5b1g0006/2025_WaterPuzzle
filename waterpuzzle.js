@@ -11,7 +11,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         document.getElementById("level-count").textContent = levelCount;
 
     }
-    levelSelect.addEventListener("change",(evemt)=>{
+    levelSelect.addEventListener("change",(event)=>{
         const selectedLevel = parseInt(event.target.value,10);
         chossLevel(selectedLevel);
     });
