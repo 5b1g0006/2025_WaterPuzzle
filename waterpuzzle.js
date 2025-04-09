@@ -6,8 +6,8 @@ document.addEventListener("DOMContentLoaded",()=>{
     const tubes = [];
     let levelCount = 1;
 
-    function chossLevel(LeveL){
-        levelCount = LeveL;
+    function chossLevel(level){
+        levelCount = level;
         document.getElementById("level-count").textContent = levelCount;
 
     }
