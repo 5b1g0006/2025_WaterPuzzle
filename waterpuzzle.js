@@ -10,6 +10,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         "indigo", "violet", "gold", "silver", "maroon", "navy", 
         "olive", "coral",
     ];
+    let selectedTube = null;
     let levelCount = 1;
 
     function chossLevel(level){
@@ -22,6 +23,41 @@ document.addEventListener("DOMContentLoaded",()=>{
         chossLevel(selectedLevel);
     });
 
+    function pourWater(fromTube, toTube){
+        let fromWater = fromTube.querySelector(".water:last-child");
+        let toWater = toTube.querySelector(".water:last-child");
+
+        if(!toWater){
+            const color = fromWater ? fromWater.style.backgroundColor : null;
+            while(fromWater && fromWater.style.backgroundColor === color && toTube.childElementCount < 4){
+                toTube.appendChild(fromWater);
+                fromWater = fromTube.querySelector(".water:last-child");
+            }
+        }
+        else{
+            while(fromWater && fromWater.style.backgroundColor === toWater.style.backgroundColor && toTube.childElementCount < 4){
+                toTube.appendChild(fromWater);
+                fromWater = fromTube.querySelector(".water:last-child");
+                toWater = toTube.querySelector(".water:last-child");
+            }
+        }
+    }
+
+
+    function selectTube(tube){
+        if(selectedTube){
+            if(selectedTube !== tube){
+                pourWater(selectedTube,tube);
+            }
+            selectedTube.classList.remove("selected");
+            selectedTube = null;
+        }
+        else{
+            selectedTube = tube;
+            selectedTube.classList.add("selected");
+        }
+    }
+
     function createTubes(){
         //gameContainer.innerHTML = "產生試管";
         gameContainer.innerHTML = "";
@@ -30,7 +66,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         for(let i=0; i < levelCount + 1; i++){
             const tube = document.createElement("div");
             tube.classList.add("tube");
-            //要新增tube的事件處理樣式
+            tube.addEventListener("click",()=>selectTube(tube));
             gameContainer.appendChild(tube);
             tubes.push(tube);
 
@@ -41,6 +77,7 @@ document.addEventListener("DOMContentLoaded",()=>{
         for (let i = 0; i < 2; i++) {
             const empytTube = document.createElement("div");
             empytTube.classList.add("tube");
+            empytTube.addEventListener("click",()=>selectedTube(empytTube));
             gameContainer.appendChild(empytTube);
             tubes.push(empytTube);
           }
@@ -88,4 +125,5 @@ document.addEventListener("DOMContentLoaded",()=>{
         fillTubes(); //填滿試管顏色
 
     });
+    
 });
