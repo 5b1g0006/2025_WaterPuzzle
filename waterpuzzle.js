@@ -33,12 +33,14 @@ document.addEventListener("DOMContentLoaded",()=>{
             )
           );
         };
-        let completedTubes = 0;
+        
+    let completedTubes = 0;
     tubes.forEach((tube) => {
       if (allSameColor(tube)) {
         completedTubes++;
       }
     });
+
     document.getElementById("completed-tubes-count").textContent =
       completedTubes;
 
