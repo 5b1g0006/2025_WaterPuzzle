@@ -22,24 +22,33 @@ document.addEventListener("DOMContentLoaded",()=>{
         chooseLevel(selectedLevel);
     });
 
-    function checkGameState(){
+    function checkGameState() {
         const allSameColor = (tube) => {
-            const selectesLevel = parseInt(event.target.value,10);
-            return (
-                waters.length === 4 &&
-                waters.every(
-                    (water) =>
-                        water.style.backgroundColor === waters[0].style.backgroundColor
-                )
-            );
+          const waters = Array.from(tube.children);
+          return (
+            waters.length === 4 &&
+            waters.every(
+              (water) =>
+                water.style.backgroundColor === waters[0].style.backgroundColor
+            )
+          );
         };
-        let completeTubes =0;
-        tubes.forEach((tube) => {
-            if (allSameColor(tube)) {
-                completeTubes++;
-            }
-        });
+        let completedTubes = 0;
+    tubes.forEach((tube) => {
+      if (allSameColor(tube)) {
+        completedTubes++;
+      }
+    });
+    document.getElementById("completed-tubes-count").textContent =
+      completedTubes;
+
+    //檢查是否所有的試管都完成或者是空試管
+    if (
+      tubes.every((tube) => tube.childElementCount === 0 || allSameColor(tube))
+    ) {
+      alert("你已經完成本關卡");
     }
+  }
 
     function pourWater(fromTube, toTube){
         let fromWater = fromTube.querySelector(".water:last-child");
