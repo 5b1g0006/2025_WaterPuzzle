@@ -13,14 +13,13 @@ document.addEventListener("DOMContentLoaded",()=>{
     let selectedTube = null;
     let levelCount = 1;
 
-    function chossLevel(level){
+    function chooseLevel(level) {
         levelCount = level;
         document.getElementById("level-count").textContent = levelCount;
-
     }
-    levelSelect.addEventListener("change",(event)=>{
-        const selectedLevel = parseInt(event.target.value,10);
-        chossLevel(selectedLevel);
+    levelSelect.addEventListener("change", (event) => {
+        const selectedLevel = parseInt(event.target.value, 10);
+        chooseLevel(selectedLevel);
     });
 
     function checkGameState(){
