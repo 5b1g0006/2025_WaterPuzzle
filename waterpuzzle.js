@@ -33,7 +33,7 @@ document.addEventListener("DOMContentLoaded",()=>{
             )
           );
         };
-        
+
     let completedTubes = 0;
     tubes.forEach((tube) => {
       if (allSameColor(tube)) {
@@ -105,14 +105,14 @@ document.addEventListener("DOMContentLoaded",()=>{
             tubes.push(tube);  
         }
 
-        //新增兩管空的試管當作緩衝使用
-        for (let i = 0; i < 2; i++) {
-            const empytTube = document.createElement("div");
-            empytTube.classList.add("tube");
-            empytTube.addEventListener("click",()=>selectedTube(empytTube));
-            gameContainer.appendChild(empytTube);
-            tubes.push(empytTube);
-          }
+    //新增兩管空的試管來當作緩衝使用
+    for (let i = 0; i < 2; i++) {
+        const emptyTube = document.createElement("div");
+        emptyTube.classList.add("tube");
+        emptyTube.addEventListener("click", () => selectTube(emptyTube));
+        gameContainer.appendChild(emptyTube);
+        tubes.push(emptyTube);
+    }
     }
 
     function fillTubes(){
