@@ -23,6 +23,25 @@ document.addEventListener("DOMContentLoaded",()=>{
         chossLevel(selectedLevel);
     });
 
+    function checkGameState(){
+        const allSameColor = (tube) => {
+            const selectesLevel = parseInt(event.target.value,10);
+            return (
+                waters.length === 4 &&
+                waters.every(
+                    (water) =>
+                        water.style.backgroundColor === waters[0].style.backgroundColor
+                )
+            );
+        };
+        let completeTubes =0;
+        tubes.forEach((tube) => {
+            if (allSameColor(tube)) {
+                completeTubes++;
+            }
+        });
+    }
+
     function pourWater(fromTube, toTube){
         let fromWater = fromTube.querySelector(".water:last-child");
         let toWater = toTube.querySelector(".water:last-child");
@@ -35,12 +54,17 @@ document.addEventListener("DOMContentLoaded",()=>{
             }
         }
         else{
-            while(fromWater && fromWater.style.backgroundColor === toWater.style.backgroundColor && toTube.childElementCount < 4){
+            while (
+                fromWater &&
+                fromWater.style.backgroundColor === toWater.style.backgroundColor &&
+                toTube.childElementCount < 4
+            ) {
                 toTube.appendChild(fromWater);
                 fromWater = fromTube.querySelector(".water:last-child");
                 toWater = toTube.querySelector(".water:last-child");
             }
         }
+        checkGameState();
     }
 
 
@@ -68,9 +92,7 @@ document.addEventListener("DOMContentLoaded",()=>{
             tube.classList.add("tube");
             tube.addEventListener("click",()=>selectTube(tube));
             gameContainer.appendChild(tube);
-            tubes.push(tube);
-
-            
+            tubes.push(tube);  
         }
 
         //新增兩管空的試管當作緩衝使用
@@ -123,7 +145,5 @@ document.addEventListener("DOMContentLoaded",()=>{
         tubes.length = 0; //清空試管
         createTubes(); //產生試管
         fillTubes(); //填滿試管顏色
-
     });
-    
 });
