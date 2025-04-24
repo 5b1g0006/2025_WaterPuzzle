@@ -54,7 +54,7 @@ document.addEventListener("DOMContentLoaded",()=>{
       else{
         alert("恭喜你完成了本關卡！");
         levelCount++;
-        document.getElementById("level-count").textContent = levelCount;
+        document.getElementById("level-select").value = levelCount;
         document.getElementById("completed-tubes-count").textContent = 0;
         chooseLevel(levelCount);
         createTubes();
@@ -104,17 +104,17 @@ document.addEventListener("DOMContentLoaded",()=>{
         }
     }
 
-    function createTubes(){
+    function createTubes() {
         //gameContainer.innerHTML = "產生試管";
         gameContainer.innerHTML = "";
         tubes.length = 0; //清空試管
 
-        for(let i=0; i < levelCount + 1; i++){
+        for (let i = 0; i < levelCount + 1; i++) {
             const tube = document.createElement("div");
             tube.classList.add("tube");
-            tube.addEventListener("click",()=>selectTube(tube));
+            tube.addEventListener("click", () => selectTube(tube));
             gameContainer.appendChild(tube);
-            tubes.push(tube);  
+            tubes.push(tube);
         }
 
     //新增兩管空的試管來當作緩衝使用
